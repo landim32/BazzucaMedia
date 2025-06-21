@@ -57,11 +57,9 @@ export default function ClientList() {
                                 <p className="text-gray-400">Schedule your content across social platforms</p>
                             </div>
                         </div>
-                        <Card>
+                        <Card className="bg-brand-dark border-brand-gray/30">
                             <CardHeader>
-                                <CardTitle>
-                                    <h1>Client List</h1>
-                                </CardTitle>
+                                <CardTitle className="text-white">Client List</CardTitle>
                             </CardHeader>
                             <CardContent>
                                 <ClientTable loading={clientContext.loading} clients={clientContext.clients} />
