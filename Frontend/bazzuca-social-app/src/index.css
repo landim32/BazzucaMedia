@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,7 +6,7 @@
 
 @layer base {
   :root {
-    --background: 248 250 252;
+    --background: 169 59 171;
     --foreground: 15 23 42;
 
     --card: 255 255 255;
@@ -17,19 +16,19 @@
     --popover-foreground: 15 23 42;
 
     --primary: 59 130 246;
-    --primary-foreground: 248 250 252;
+    --primary-foreground: 169 59 171;
 
-    --secondary: 241 245 249;
+    --secondary: 169 59 171;
     --secondary-foreground: 15 23 42;
 
-    --muted: 241 245 249;
+    --muted: 169 59 171;
     --muted-foreground: 100 116 139;
 
-    --accent: 241 245 249;
+    --accent: 169 59 171;
     --accent-foreground: 15 23 42;
 
     --destructive: 239 68 68;
-    --destructive-foreground: 248 250 252;
+    --destructive-foreground: 169 59 171;
 
     --border: 226 232 240;
     --input: 226 232 240;
@@ -37,11 +36,11 @@
 
     --radius: 0.5rem;
 
-    --sidebar-background: 248 250 252;
+    --sidebar-background: #a93bab; /*169 59 171;*/
     --sidebar-foreground: 15 23 42;
     --sidebar-primary: 59 130 246;
-    --sidebar-primary-foreground: 248 250 252;
-    --sidebar-accent: 241 245 249;
+    --sidebar-primary-foreground: 169 59 171;
+    --sidebar-accent: 169 59 171;
     --sidebar-accent-foreground: 15 23 42;
     --sidebar-border: 226 232 240;
     --sidebar-ring: 59 130 246;
@@ -49,39 +48,39 @@
 
   .dark {
     --background: 2 6 23;
-    --foreground: 248 250 252;
+    --foreground: 169 59 171;
 
     --card: 15 23 42;
-    --card-foreground: 248 250 252;
+    --card-foreground: 169 59 171;
 
     --popover: 15 23 42;
-    --popover-foreground: 248 250 252;
+    --popover-foreground: 169 59 171;
 
     --primary: 59 130 246;
-    --primary-foreground: 248 250 252;
+    --primary-foreground: 169 59 171;
 
     --secondary: 30 41 59;
-    --secondary-foreground: 248 250 252;
+    --secondary-foreground: 169 59 171;
 
     --muted: 30 41 59;
     --muted-foreground: 148 163 184;
 
     --accent: 30 41 59;
-    --accent-foreground: 248 250 252;
+    --accent-foreground: 169 59 171;
 
     --destructive: 239 68 68;
-    --destructive-foreground: 248 250 252;
+    --destructive-foreground: 169 59 171;
 
     --border: 30 41 59;
     --input: 30 41 59;
     --ring: 59 130 246;
 
     --sidebar-background: 15 23 42;
-    --sidebar-foreground: 248 250 252;
+    --sidebar-foreground: 169 59 171;
     --sidebar-primary: 59 130 246;
-    --sidebar-primary-foreground: 248 250 252;
+    --sidebar-primary-foreground: 169 59 171;
     --sidebar-accent: 30 41 59;
-    --sidebar-accent-foreground: 248 250 252;
+    --sidebar-accent-foreground: 169 59 171;
     --sidebar-border: 30 41 59;
     --sidebar-ring: 59 130 246;
   }

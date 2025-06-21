@@ -5,6 +5,7 @@ using BazzucaSocial.Domain.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BazzucaSocial.DTO.SocialNetwork;
 
 namespace BazzucaSocial.Domain.Impl.Services
 {
@@ -32,17 +33,55 @@ namespace BazzucaSocial.Domain.Impl.Services
             return _factory.BuildSocialNetworkModel().GetById(id, _factory);
         }
 
-        public ISocialNetworkModel Insert(ISocialNetworkModel model)
+        public SocialNetworkInfo GetNetworkInfo(ISocialNetworkModel model)
         {
             if (model == null)
+            {
+                return null;
+            }
+            return new SocialNetworkInfo { 
+                NetworkId = model.NetworkId,
+                Network = model.Network,
+                ClientId = model.ClientId,
+                Url = model.Url,
+                User = model.User,
+                Password = model.Password
+            };
+        }
+
+        public ISocialNetworkModel Insert(SocialNetworkInfo network)
+        {
+            if (network == null)
+            {
                 throw new ArgumentException("Model not informed");
+            }
+            var model = _factory.BuildSocialNetworkModel();
+
+            model.NetworkId = network.NetworkId;
+            model.Network = network.Network;
+            model.ClientId = network.ClientId;
+            model.Url = network.Url;
+            model.User = network.User;
+            model.Password = network.Password;
+
             return model.Insert(_factory);
         }
 
-        public ISocialNetworkModel Update(ISocialNetworkModel model)
+        public ISocialNetworkModel Update(SocialNetworkInfo network)
         {
-            if (model == null)
+            if (network == null)
+            {
                 throw new ArgumentException("Model not informed");
+            }
+            var model = _factory.BuildSocialNetworkModel();
+
+            model.NetworkId = network.NetworkId;
+            model.Network = network.Network;
+            model.ClientId = network.ClientId;
+            model.Url = network.Url;
+            model.User = network.User;
+            model.Password = network.Password;
+
             return model.Update(_factory);
         }
     }

@@ -1,0 +1,37 @@
+using Core.Domain;
+using Core.Domain.Repository;
+using BazzucaSocial.Domain.Interfaces.Factory;
+using BazzucaSocial.Domain.Interfaces.Models;
+using System;
+using System.Collections.Generic;
+
+namespace BazzucaSocial.Domain.Impl.Models
+{
+    public class ClientModel : IClientModel
+    {
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IClientRepository<IClientModel, IClientDomainFactory> _repository;
+
+        public ClientModel(IUnitOfWork unitOfWork, IClientRepository<IClientModel, IClientDomainFactory> repository)
+        {
+            _unitOfWork = unitOfWork;
+            _repository = repository;
+        }
+
+        public long ClientId { get; set; }
+        public long UserId { get; set; }
+        public string Name { get; set; }
+
+        public IEnumerable<IClientModel> ListByUser(long userId, IClientDomainFactory factory)
+            => _repository.ListByUser(userId, factory);
+
+        public IClientModel GetById(long clientId, IClientDomainFactory factory)
+            => _repository.GetById(clientId, factory);
+
+        public IClientModel Insert(IClientDomainFactory factory)
+            => _repository.Insert(this, factory);
+
+        public IClientModel Update(IClientDomainFactory factory)
+            => _repository.Update(this, factory);
+    }
+}

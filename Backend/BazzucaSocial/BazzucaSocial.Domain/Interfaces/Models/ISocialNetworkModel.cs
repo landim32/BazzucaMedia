@@ -1,4 +1,5 @@
 using BazzucaSocial.Domain.Interfaces.Factory;
+using BazzucaSocial.DTO.SocialNetwork;
 using System.Collections.Generic;
 
 namespace BazzucaSocial.Domain.Interfaces.Models
@@ -6,8 +7,8 @@ namespace BazzucaSocial.Domain.Interfaces.Models
     public interface ISocialNetworkModel
     {
         long NetworkId { get; set; }
-        long UserId { get; set; }
-        int NetworkKey { get; set; }
+        long ClientId { get; set; }
+        SocialNetworkEnum Network { get; set; }
         string Url { get; set; }
         string User { get; set; }
         string Password { get; set; }

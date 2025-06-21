@@ -1,41 +1,47 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
-import Index from "./pages/Index";
+import { useContext, useState } from "react";
+import Index from "./pages/HomePage/Index";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
-import Dashboard from "./pages/Dashboard";
-import NewPost from "./pages/NewPost";
+import Dashboard from "./pages/Dashboard/Index";
+import Post from "./pages/Post/Index";
 import NotFound from "./pages/NotFound";
+import { AuthContext, AuthProvider, ContextBuilder, IAuthProvider, UserProvider } from "nauth-core";
+import ClientProvider from "./Contexts/User/ClientProvider";
+import ClientList from "./pages/ClientList/Index";
 
 const queryClient = new QueryClient();
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const ContextContainer = ContextBuilder([AuthProvider, UserProvider, ClientProvider]);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/dashboard" element={<Dashboard isAuthenticated={isAuthenticated} />} />
-            <Route path="/new-post" element={<NewPost isAuthenticated={isAuthenticated} />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <ContextContainer>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/clients" element={<ClientList />} />
+              <Route path="/new-post" element={<Post/>} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ContextContainer>
   );
 }
 

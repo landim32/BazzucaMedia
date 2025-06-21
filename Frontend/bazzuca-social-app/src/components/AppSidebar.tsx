@@ -1,5 +1,5 @@
 
-import { Calendar, Home, Plus, BarChart3, Settings, LogOut } from "lucide-react";
+import { Calendar, Home, Plus, BarChart3, Settings, LogOut, Users } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import {
   Sidebar,
@@ -15,12 +15,18 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/images/logo.png";
 
 const menuItems = [
   {
     title: "Dashboard",
     url: "/dashboard",
     icon: Home,
+  },
+  {
+    title: "Clients",
+    url: "/clients",
+    icon: Users,
   },
   {
     title: "New Post",
@@ -51,7 +57,7 @@ export function AppSidebar() {
     <Sidebar className="bg-brand-dark border-brand-gray/30">
       <SidebarHeader className="border-b border-brand-gray/30 p-4">
         <div className="flex items-center space-x-3">
-          <img src="/lovable-uploads/09350797-0506-4281-b51c-6b3ebcf8dc2a.png" alt="Social Bazzuca" className="h-8 w-auto" />
+          <img src={logo} alt="Social Bazzuca" className="h-8 w-auto" />
         </div>
         <SidebarTrigger className="ml-auto text-white" />
       </SidebarHeader>

@@ -65,7 +65,7 @@ export default {
 				},
 				// Social Bazzuca custom colors
 				'brand-blue': '#3B82F6',
-				'brand-purple': '#8B5CF6',
+				'brand-purple': '#a93bab',
 				'brand-dark': '#0F172A',
 				'brand-darker': '#020617',
 				'brand-gray': '#1E293B'
@@ -120,7 +120,7 @@ export default {
 				'slide-up': 'slide-up 0.6s ease-out',
 			},
 			backgroundImage: {
-				'gradient-brand': 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+				'gradient-brand': 'linear-gradient(135deg, #3B82F6 0%, #a93bab 100%)',
 				'gradient-dark': 'linear-gradient(135deg, #0F172A 0%, #020617 100%)',
 			}
 		}

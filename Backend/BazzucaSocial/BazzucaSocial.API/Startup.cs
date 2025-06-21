@@ -35,7 +35,7 @@ namespace BazzucaSocial.API
         {
             var config = new ConfigurationParam
             {
-                ConnectionString = Configuration.GetConnectionString("MonexUpContext")
+                ConnectionString = Configuration.GetConnectionString("BazzucaContext")
             };
             Initializer.Configure(services, config);
             services.AddControllers();
@@ -43,7 +43,7 @@ namespace BazzucaSocial.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { 
-                    Title = "MonexUp.API", 
+                    Title = "BazzucaSocial.API", 
                     Version = "v1" 
                 });
             });
@@ -70,7 +70,7 @@ namespace BazzucaSocial.API
                     c.OpenApiVersion = Microsoft.OpenApi.OpenApiSpecVersion.OpenApi2_0;
                 });
                 app.UseSwaggerUI(c => {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "MonexUp.API v1");
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "BazzucaSocial.API v1");
                     //c.RoutePrefix = string.Empty;
                 });
             }

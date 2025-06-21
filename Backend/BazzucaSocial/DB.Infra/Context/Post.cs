@@ -9,7 +9,7 @@ public partial class Post
 
     public long NetworkId { get; set; }
 
-    public long UserId { get; set; }
+    public long ClientId { get; set; }
 
     public DateTime ScheduleDate { get; set; }
 
@@ -22,6 +22,8 @@ public partial class Post
     public int Status { get; set; }
 
     public string Description { get; set; }
+
+    public virtual Client Client { get; set; }
 
     public virtual SocialNetwork Network { get; set; }
 }

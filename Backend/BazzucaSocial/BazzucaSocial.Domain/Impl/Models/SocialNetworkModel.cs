@@ -1,7 +1,8 @@
-using Core.Domain;
-using Core.Domain.Repository;
 using BazzucaSocial.Domain.Interfaces.Factory;
 using BazzucaSocial.Domain.Interfaces.Models;
+using BazzucaSocial.DTO.SocialNetwork;
+using Core.Domain;
+using Core.Domain.Repository;
 using System.Collections.Generic;
 
 namespace BazzucaSocial.Domain.Impl.Models
@@ -18,8 +19,8 @@ namespace BazzucaSocial.Domain.Impl.Models
         }
 
         public long NetworkId { get; set; }
-        public long UserId { get; set; }
-        public int NetworkKey { get; set; }
+        public long ClientId { get; set; }
+        public SocialNetworkEnum Network { get; set; }
         public string Url { get; set; }
         public string User { get; set; }
         public string Password { get; set; }

@@ -33,32 +33,33 @@ namespace BazzucaSocial.Application
         public static void Configure(IServiceCollection services, ConfigurationParam config, bool scoped = true)
         {
             if (scoped)
-                services.AddDbContext<EasySLAContext>(x => x.UseLazyLoadingProxies().UseNpgsql(config.ConnectionString));
+                services.AddDbContext<BazzucaContext>(x => x.UseLazyLoadingProxies().UseNpgsql(config.ConnectionString));
             else
-                services.AddDbContextFactory<EasySLAContext>(x => x.UseLazyLoadingProxies().UseNpgsql(config.ConnectionString));
+                services.AddDbContextFactory<BazzucaContext>(x => x.UseLazyLoadingProxies().UseNpgsql(config.ConnectionString));
 
             #region Infra
-            injectDependency(typeof(EasySLAContext), typeof(EasySLAContext), services, scoped);
+            injectDependency(typeof(BazzucaContext), typeof(BazzucaContext), services, scoped);
             injectDependency(typeof(IUnitOfWork), typeof(UnitOfWork), services, scoped);
             injectDependency(typeof(ILogCore), typeof(LogCore), services, scoped);
             #endregion
 
             #region Repository
-            injectDependency(typeof(ICompanyRepository<ICompanyModel, ICompanyDomainFactory>), typeof(CompanyRepository), services, scoped);
             injectDependency(typeof(ISocialNetworkRepository<ISocialNetworkModel, ISocialNetworkDomainFactory>), typeof(SocialNetworkRepository), services, scoped);
             injectDependency(typeof(IPostRepository<IPostModel, IPostDomainFactory>), typeof(PostRepository), services, scoped);
+            injectDependency(typeof(IClientRepository<IClientModel, IClientDomainFactory>), typeof(ClientRepository), services, scoped);
             #endregion
 
             #region Service
             injectDependency(typeof(IUserClient), typeof(UserClient), services, scoped);
-            injectDependency(typeof(ICompanyService), typeof(CompanyService), services, scoped);
+            injectDependency(typeof(ISocialNetworkService), typeof(SocialNetworkService), services, scoped);
+            injectDependency(typeof(IClientService), typeof(ClientService), services, scoped);
             // Adicione aqui se houver um serviço para SocialNetwork
             #endregion
 
             #region Factory
-            injectDependency(typeof(ICompanyDomainFactory), typeof(CompanyDomainFactory), services, scoped);
             injectDependency(typeof(ISocialNetworkDomainFactory), typeof(SocialNetworkDomainFactory), services, scoped);
             injectDependency(typeof(IPostDomainFactory), typeof(PostDomainFactory), services, scoped);
+            injectDependency(typeof(IClientDomainFactory), typeof(ClientDomainFactory), services, scoped);
             #endregion
 
 

@@ -1,4 +1,5 @@
 using BazzucaSocial.Domain.Interfaces.Factory;
+using BazzucaSocial.DTO.Post;
 using System;
 using System.Collections.Generic;
 
@@ -8,12 +9,12 @@ namespace BazzucaSocial.Domain.Interfaces.Models
     {
         long PostId { get; set; }
         long NetworkId { get; set; }
-        long UserId { get; set; }
+        long ClientId { get; set; }
         DateTime ScheduleDate { get; set; }
         int PostType { get; set; }
         string S3Key { get; set; }
         string Title { get; set; }
-        int Status { get; set; }
+        PostStatusEnum Status { get; set; }
         string Description { get; set; }
 
         IEnumerable<IPostModel> ListByUser(long userId, int take, IPostDomainFactory factory);

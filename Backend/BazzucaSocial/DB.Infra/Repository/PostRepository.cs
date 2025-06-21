@@ -1,7 +1,8 @@
-using Core.Domain.Repository;
-using DB.Infra.Context;
 using BazzucaSocial.Domain.Interfaces.Factory;
 using BazzucaSocial.Domain.Interfaces.Models;
+using BazzucaSocial.DTO.Post;
+using Core.Domain.Repository;
+using DB.Infra.Context;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,12 +22,12 @@ namespace DB.Infra.Repository
             var model = factory.BuildPostModel();
             model.PostId = row.PostId;
             model.NetworkId = row.NetworkId;
-            model.UserId = row.UserId;
+            model.ClientId = row.ClientId;
             model.ScheduleDate = row.ScheduleDate;
             model.PostType = row.PostType;
             model.S3Key = row.S3Key;
             model.Title = row.Title;
-            model.Status = row.Status;
+            model.Status = (PostStatusEnum)row.Status;
             model.Description = row.Description;
             return model;
         }
@@ -35,19 +36,19 @@ namespace DB.Infra.Repository
         {
             row.PostId = model.PostId;
             row.NetworkId = model.NetworkId;
-            row.UserId = model.UserId;
+            row.ClientId = model.ClientId;
             row.ScheduleDate = model.ScheduleDate;
             row.PostType = model.PostType;
             row.S3Key = model.S3Key;
             row.Title = model.Title;
-            row.Status = model.Status;
+            row.Status = (int)model.Status;
             row.Description = model.Description;
         }
 
         public IEnumerable<IPostModel> ListByUser(long userId, int take, IPostDomainFactory factory)
         {
             var rows = _context.Posts
-                .Where(x => x.UserId == userId)
+                .Where(x => x.Client.UserId == userId)
                 .OrderBy(x => x.ScheduleDate)
                 .Take(take)
                 .ToList();

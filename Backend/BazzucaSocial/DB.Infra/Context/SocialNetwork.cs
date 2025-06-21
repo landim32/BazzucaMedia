@@ -7,7 +7,7 @@ public partial class SocialNetwork
 {
     public long NetworkId { get; set; }
 
-    public long UserId { get; set; }
+    public long ClientId { get; set; }
 
     public int NetworkKey { get; set; }
 
@@ -16,6 +16,8 @@ public partial class SocialNetwork
     public string User { get; set; }
 
     public string Password { get; set; }
+
+    public virtual Client Client { get; set; }
 
     public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
 }

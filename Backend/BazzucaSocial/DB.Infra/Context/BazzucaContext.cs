@@ -15,6 +15,8 @@ public partial class BazzucaContext : DbContext
     {
     }
 
+    public virtual DbSet<Client> Clients { get; set; }
+
     public virtual DbSet<Post> Posts { get; set; }
 
     public virtual DbSet<SocialNetwork> SocialNetworks { get; set; }
@@ -25,6 +27,20 @@ public partial class BazzucaContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Client>(entity =>
+        {
+            entity.HasKey(e => e.ClientId).HasName("clients_pkey");
+
+            entity.ToTable("clients");
+
+            entity.Property(e => e.ClientId).HasColumnName("client_id");
+            entity.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(80)
+                .HasColumnName("name");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
+        });
+
         modelBuilder.Entity<Post>(entity =>
         {
             entity.HasKey(e => e.PostId).HasName("posts_pkey");
@@ -32,6 +48,7 @@ public partial class BazzucaContext : DbContext
             entity.ToTable("posts");
 
             entity.Property(e => e.PostId).HasColumnName("post_id");
+            entity.Property(e => e.ClientId).HasColumnName("client_id");
             entity.Property(e => e.Description)
                 .IsRequired()
                 .HasColumnName("description");
@@ -51,7 +68,11 @@ public partial class BazzucaContext : DbContext
                 .IsRequired()
                 .HasMaxLength(80)
                 .HasColumnName("title");
-            entity.Property(e => e.UserId).HasColumnName("user_id");
+
+            entity.HasOne(d => d.Client).WithMany(p => p.Posts)
+                .HasForeignKey(d => d.ClientId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_client_post");
 
             entity.HasOne(d => d.Network).WithMany(p => p.Posts)
                 .HasForeignKey(d => d.NetworkId)
@@ -66,6 +87,7 @@ public partial class BazzucaContext : DbContext
             entity.ToTable("social_networks");
 
             entity.Property(e => e.NetworkId).HasColumnName("network_id");
+            entity.Property(e => e.ClientId).HasColumnName("client_id");
             entity.Property(e => e.NetworkKey).HasColumnName("network_key");
             entity.Property(e => e.Password)
                 .HasMaxLength(255)
@@ -77,7 +99,11 @@ public partial class BazzucaContext : DbContext
             entity.Property(e => e.User)
                 .HasMaxLength(255)
                 .HasColumnName("user");
-            entity.Property(e => e.UserId).HasColumnName("user_id");
+
+            entity.HasOne(d => d.Client).WithMany(p => p.SocialNetworks)
+                .HasForeignKey(d => d.ClientId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_client_social_network");
         });
 
         OnModelCreatingPartial(modelBuilder);

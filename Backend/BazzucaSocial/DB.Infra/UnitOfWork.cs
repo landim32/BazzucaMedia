@@ -9,10 +9,10 @@ namespace DB.Infra
     public class UnitOfWork : IUnitOfWork
     {
 
-        private readonly EasySLAContext _ccsContext;
+        private readonly BazzucaContext _ccsContext;
         private readonly ILogCore _log;
 
-        public UnitOfWork(ILogCore log, EasySLAContext ccsContext)
+        public UnitOfWork(ILogCore log, BazzucaContext ccsContext)
         {
             this._ccsContext = ccsContext;
             _log = log;

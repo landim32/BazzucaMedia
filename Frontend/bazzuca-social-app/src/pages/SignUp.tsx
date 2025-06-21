@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import logo from "@/assets/images/logo.png";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -51,9 +52,9 @@ const SignUp = () => {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link to="/">
-            <img src="/lovable-uploads/09350797-0506-4281-b51c-6b3ebcf8dc2a.png" alt="Social Bazzuca" className="h-12 w-auto mx-auto mb-4" />
+            <img src={logo} alt="Social Bazzuca" className="h-12 w-auto mx-auto mb-4" />
           </Link>
-          <h1 className="text-2xl font-bold text-white">Create Account</h1>
+          {/*<h1 className="text-2xl font-bold text-white">Create Account</h1>*/}
           <p className="text-gray-400">Join Social Bazzuca and start scheduling smarter</p>
         </div>
 
