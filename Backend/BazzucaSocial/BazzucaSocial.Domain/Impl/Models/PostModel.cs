@@ -24,7 +24,7 @@ namespace BazzucaSocial.Domain.Impl.Models
         public long ClientId { get; set; }
         public DateTime ScheduleDate { get; set; }
         public PostTypeEnum PostType { get; set; }
-        public string S3Key { get; set; }
+        public string MediaUrl { get; set; }
         public string Title { get; set; }
         public PostStatusEnum Status { get; set; }
         public string Description { get; set; }

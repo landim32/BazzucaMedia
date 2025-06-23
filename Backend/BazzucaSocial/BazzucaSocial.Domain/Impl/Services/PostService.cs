@@ -55,7 +55,7 @@ namespace BazzucaSocial.Domain.Impl.Services
                 ClientId = model.ClientId,
                 NetworkId = model.NetworkId,
                 PostType = model.PostType,
-                S3Key = model.S3Key,
+                MediaUrl = model.MediaUrl,
                 ScheduleDate = model.ScheduleDate,
                 Title = model.Title,
                 Description = model.Description,
@@ -73,12 +73,14 @@ namespace BazzucaSocial.Domain.Impl.Services
             }
             var model = _postFactory.BuildPostModel();
 
+            var scheduleDate = DateTime.SpecifyKind(post.ScheduleDate, DateTimeKind.Unspecified);
+
             model.PostId = post.PostId;
             model.ClientId = post.ClientId;
             model.NetworkId = post.NetworkId;
             model.PostType = post.PostType;
-            model.S3Key = post.S3Key;
-            model.ScheduleDate = post.ScheduleDate;
+            model.MediaUrl = post.MediaUrl;
+            model.ScheduleDate = scheduleDate;
             model.Title = post.Title;
             model.Description = post.Description;
             model.Status = post.Status;
@@ -92,14 +94,15 @@ namespace BazzucaSocial.Domain.Impl.Services
             {
                 throw new ArgumentException("Post não informado");
             }
-            var model = _postFactory.BuildPostModel();
+            var model = _postFactory.BuildPostModel().GetById(post.PostId, _postFactory);
 
-            model.PostId = post.PostId;
+            var scheduleDate = DateTime.SpecifyKind(post.ScheduleDate, DateTimeKind.Unspecified);
+
             model.ClientId = post.ClientId;
             model.NetworkId = post.NetworkId;
             model.PostType = post.PostType;
-            model.S3Key = post.S3Key;
-            model.ScheduleDate = post.ScheduleDate;
+            model.MediaUrl = post.MediaUrl;
+            model.ScheduleDate = scheduleDate;
             model.Title = post.Title;
             model.Description = post.Description;
             model.Status = post.Status;

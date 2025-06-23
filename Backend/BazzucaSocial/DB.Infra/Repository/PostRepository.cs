@@ -25,7 +25,7 @@ namespace DB.Infra.Repository
             model.ClientId = row.ClientId;
             model.ScheduleDate = row.ScheduleDate;
             model.PostType = (PostTypeEnum) row.PostType;
-            model.S3Key = row.S3Key;
+            model.MediaUrl = row.S3Key;
             model.Title = row.Title;
             model.Status = (PostStatusEnum)row.Status;
             model.Description = row.Description;
@@ -39,7 +39,7 @@ namespace DB.Infra.Repository
             row.ClientId = model.ClientId;
             row.ScheduleDate = model.ScheduleDate;
             row.PostType = (int) model.PostType;
-            row.S3Key = model.S3Key;
+            row.S3Key = model.MediaUrl;
             row.Title = model.Title;
             row.Status = (int)model.Status;
             row.Description = model.Description;

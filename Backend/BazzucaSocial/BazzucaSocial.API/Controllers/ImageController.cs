@@ -47,7 +47,7 @@ namespace BazzucaSocial.API.Controllers
                 var fileName = _imageService.InsertFromStream(file.OpenReadStream(), file.FileName);
                 return new StringResult()
                 {
-                    Value = fileName
+                    Value = _imageService.GetImageUrl(fileName)
                 };
             }
             catch (Exception ex)

@@ -11,10 +11,14 @@ interface IPostProvider {
     posts: PostInfo[];
     setPosts: (posts: PostInfo[]) => void;
 
+    imageUrl: string;
+    setImageUrl: (url: string) => void;
+
     listByUser: () => Promise<ProviderResult>;
     getById: (postId: number) => Promise<ProviderResult>;
     insert: (post: PostInfo) => Promise<ProviderResult>;
     update: (post: PostInfo) => Promise<ProviderResult>;
+    uploadImage: (file: Blob, filename: string) => Promise<ProviderResult>;
 }
 
 export default IPostProvider;

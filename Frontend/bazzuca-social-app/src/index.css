@@ -1,4 +1,4 @@
-
+@import 'react-big-calendar/lib/css/react-big-calendar.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -37,7 +37,8 @@
 
     --radius: 0.5rem;
 
-    --sidebar-background: #0c1b30; /*12 27 48;*/
+    --sidebar-background: #0c1b30;
+    /*12 27 48;*/
     --sidebar-foreground: 12 27 48;
     --sidebar-primary: 67 84 192;
     --sidebar-primary-foreground: 172 58 171;

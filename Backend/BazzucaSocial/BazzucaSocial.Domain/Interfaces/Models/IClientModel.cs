@@ -10,6 +10,8 @@ namespace BazzucaSocial.Domain.Interfaces.Models
         long UserId { get; set; }
         string Name { get; set; }
 
+        string GetSocialNetworks(ISocialNetworkDomainFactory factory);
+
         IEnumerable<IClientModel> ListByUser(long userId, IClientDomainFactory factory);
         IClientModel GetById(long clientId, IClientDomainFactory factory);
         IClientModel Insert(IClientDomainFactory factory);

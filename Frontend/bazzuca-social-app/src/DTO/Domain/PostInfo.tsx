@@ -7,9 +7,9 @@ export default interface PostInfo {
     postId: number;
     networkId: number;
     clientId: number;
-    scheduleData: string;
+    scheduleDate: string;
     postType: PostTypeEnum;
-    s3Key: string;
+    mediaUrl: string;
     title: string;
     status: PostStatusEnum;
     description: string;

@@ -12,7 +12,7 @@ namespace BazzucaSocial.Domain.Interfaces.Models
         long ClientId { get; set; }
         DateTime ScheduleDate { get; set; }
         PostTypeEnum PostType { get; set; }
-        string S3Key { get; set; }
+        string MediaUrl { get; set; }
         string Title { get; set; }
         PostStatusEnum Status { get; set; }
         string Description { get; set; }

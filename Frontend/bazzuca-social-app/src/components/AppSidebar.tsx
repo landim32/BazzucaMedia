@@ -1,5 +1,5 @@
 
-import { Calendar, Home, Plus, BarChart3, Settings, LogOut, Users } from "lucide-react";
+import { Calendar, Home, Plus, BarChart3, Settings, LogOut, Users, Video } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import {
   Sidebar,
@@ -29,28 +29,24 @@ const menuItems = [
     icon: Users,
   },
   {
+    title: "Posts",
+    url: "/posts",
+    icon: Video,
+  },
+  {
     title: "New Post",
-    url: "/new-post",
+    url: "/posts/new",
     icon: Plus,
   },
   {
     title: "Calendar",
     url: "/calendar",
     icon: Calendar,
-  },
-  {
-    title: "Analytics",
-    url: "/analytics",
-    icon: BarChart3,
-  },
-  {
-    title: "Settings",
-    url: "/settings",
-    icon: Settings,
-  },
+  }
 ];
 
 export function AppSidebar() {
+  
   const location = useLocation();
 
   return (

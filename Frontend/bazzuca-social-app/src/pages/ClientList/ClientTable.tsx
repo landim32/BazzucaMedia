@@ -20,12 +20,12 @@ export default function ClientTable(props: IClientProps) {
                 <TableRow>
                     <TableHead>Name</TableHead>
                     <TableHead>Social Networks</TableHead>
-                    <TableHead>Actions</TableHead>
+                    <TableHead className="text-end">Actions</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
                 {
-                    props.loading && [1, 2, 3, 4, 5].map((index) => {
+                    props.loading && [1, 2].map((index) => {
                         return (
                             <TableRow key={index} className="cursor-pointer hover:bg-muted/50">
                                 <TableCell>
@@ -38,7 +38,7 @@ export default function ClientTable(props: IClientProps) {
                                         <Skeleton className="h-4 w-[100px] bg-gray-400" />
                                     </div>
                                 </TableCell>
-                                <TableCell>
+                                <TableCell align="right">
                                     <Button variant="ghost" size="sm" disabled={true}>
                                         <Edit2 className="h-4 w-4" />
                                     </Button>
@@ -68,15 +68,12 @@ export default function ClientTable(props: IClientProps) {
                                     </Link>
                                 </div>
                             </TableCell>
-                            <TableCell>
-                                <div className="flex items-center space-x-2 text-muted-foreground">
-                                    <Link to={`/clients/${client.clientId}`}>
-                                        <Network className="h-4 w-4" style={{ display: 'inline-block' }} />
-                                        <span>xxx</span>
-                                    </Link>
-                                </div>
+                            <TableCell className="text-muted-foreground">
+                                <Link to={`/clients/${client.clientId}`}>
+                                    <span>{client.socialNetworks}</span>
+                                </Link>
                             </TableCell>
-                            <TableCell>
+                            <TableCell className="text-end">
                                 <Button variant="ghost" size="sm" onClick={async (e) => {
                                     e.preventDefault();
                                     props.onEdit(client);

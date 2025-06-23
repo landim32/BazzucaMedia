@@ -12,14 +12,17 @@ namespace BazzucaSocial.Domain.Impl.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IClientDomainFactory _clientFactory;
+        private readonly ISocialNetworkDomainFactory _networkFactory;
 
         public ClientService(
             IUnitOfWork unitOfWork,
-            IClientDomainFactory clientFactory
+            IClientDomainFactory clientFactory,
+            ISocialNetworkDomainFactory networkFactory
         )
         {
             _unitOfWork = unitOfWork;
             _clientFactory = clientFactory;
+            _networkFactory = networkFactory;
         }
 
         public IEnumerable<IClientModel> ListByUser(long userId)
@@ -41,7 +44,8 @@ namespace BazzucaSocial.Domain.Impl.Services
             {
                 ClientId = model.ClientId,
                 UserId = model.UserId,
-                Name = model.Name
+                Name = model.Name,
+                SocialNetworks = model.GetSocialNetworks(_networkFactory)
             };
         }
 
@@ -65,9 +69,9 @@ namespace BazzucaSocial.Domain.Impl.Services
             {
                 throw new ArgumentException("Client não informado");
             }
-            var model = _clientFactory.BuildClientModel();
-            model.ClientId = client.ClientId;
-            model.UserId = client.UserId;
+            var model = _clientFactory
+                .BuildClientModel()
+                .GetById(client.ClientId, _clientFactory);
             model.Name = client.Name;
 
             return model.Update(_clientFactory);

@@ -22,7 +22,7 @@ export default function NetworkTable(props: INetworkProps) {
                     <TableHead>Social Network</TableHead>
                     <TableHead>User</TableHead>
                     <TableHead>Url</TableHead>
-                    <TableHead>Actions</TableHead>
+                    <TableHead className="text-end">Actions</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
@@ -45,7 +45,7 @@ export default function NetworkTable(props: INetworkProps) {
                                         <Skeleton className="h-4 w-[100px] bg-gray-400" />
                                     </div>
                                 </TableCell>
-                                <TableCell>
+                                <TableCell className="text-end">
                                     <Button variant="ghost" size="sm" disabled={true}>
                                         <Edit2 className="h-4 w-4" />
                                     </Button>
@@ -85,7 +85,7 @@ export default function NetworkTable(props: INetworkProps) {
                                     <span>{network.url}</span>
                                 </div>
                             </TableCell>
-                            <TableCell>
+                            <TableCell className="text-end">
                                 <Button variant="ghost" size="sm" onClick={async (e) => {
                                     e.preventDefault();
                                     props.onEdit(network);

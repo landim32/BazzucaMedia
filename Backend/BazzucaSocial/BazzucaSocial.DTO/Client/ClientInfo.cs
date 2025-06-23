@@ -15,5 +15,7 @@ namespace BazzucaSocial.DTO.Client
         public long UserId { get; set; }
         [JsonPropertyName("name")]
         public string Name { get; set; }
+        [JsonPropertyName("socialNetworks")]
+        public string SocialNetworks { get; set; }
     }
 }

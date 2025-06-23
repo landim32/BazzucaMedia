@@ -17,6 +17,8 @@ import ClientList from "./pages/ClientList/Index";
 import SocialNetworkProvider from "./Contexts/SocialNetwork/SocialNetworkProvider";
 import ClientDetail from "./pages/ClientDetail/Index";
 import PostProvider from "./Contexts/Post/PostProvider";
+import PostList from "./pages/PostList/Index";
+import CalendarPage from "./pages/CalendarPage/Index";
 
 const queryClient = new QueryClient();
 
@@ -44,7 +46,12 @@ function App() {
                 <Route index element={<ClientList />} />
                 <Route path=":clientId" element={<ClientDetail />} />
               </Route>
-              <Route path="/new-post" element={<Post/>} />
+              <Route path="/posts">
+                <Route index element={<PostList />} />
+                <Route path="new" element={<Post />} />
+                <Route path=":postId" element={<Post />} />
+              </Route>
+              <Route path="/calendar" element={<CalendarPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

@@ -4,6 +4,7 @@ import { ProviderResult } from "nauth-core";
 import PostFactory from "@/Business/Factory/PostFactory";
 import PostInfo from "@/DTO/Domain/PostInfo";
 import PostContext from "./PostContext";
+import ImageFactory from "@/Business/Factory/ImageFactory";
 
 export default function PostProvider(props: any) {
 
@@ -12,6 +13,8 @@ export default function PostProvider(props: any) {
 
     const [post, _setPost] = useState<PostInfo>(null);
     const [posts, _setPosts] = useState<PostInfo[]>([]);
+
+    const [imageUrl, _setImageUrl] = useState<string>("");
 
     const PostProviderValue: IPostProvider = {
         loading: loading,
@@ -25,6 +28,11 @@ export default function PostProvider(props: any) {
         posts: posts,
         setPosts: (posts: PostInfo[]) => {
             _setPosts(posts);
+        },
+
+        imageUrl: imageUrl,
+        setImageUrl: (url: string) => {
+            _setImageUrl(url);
         },
 
         listByUser: async () => {
@@ -68,6 +76,7 @@ export default function PostProvider(props: any) {
                 if (brt.sucesso) {
                     setLoading(false);
                     _setPost(brt.dataResult);
+                    _setImageUrl(brt.dataResult.mediaUrl);
                     return {
                         ...ret,
                         sucesso: true,
@@ -137,6 +146,39 @@ export default function PostProvider(props: any) {
                         ...ret,
                         sucesso: true,
                         mensagemSucesso: "User load"
+                    };
+                }
+                else {
+                    setLoadingUpdate(false);
+                    return {
+                        ...ret,
+                        sucesso: false,
+                        mensagemErro: brt.mensagem
+                    };
+                }
+            }
+            catch (err) {
+                setLoadingUpdate(false);
+                return {
+                    ...ret,
+                    sucesso: false,
+                    mensagemErro: JSON.stringify(err)
+                };
+            }
+        },
+
+        uploadImage: async (file: Blob, filename: string) => {
+            let ret: Promise<ProviderResult>;
+            setLoadingUpdate(true);
+            try {
+                let brt = await ImageFactory.ImageBusiness.uploadImage(file, filename);
+                if (brt.sucesso) {
+                    setLoadingUpdate(false);
+                    _setImageUrl(brt.dataResult);
+                    return {
+                        ...ret,
+                        sucesso: true,
+                        mensagemSucesso: "Image uploaded"
                     };
                 }
                 else {

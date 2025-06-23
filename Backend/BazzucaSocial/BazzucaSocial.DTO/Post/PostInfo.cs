@@ -21,8 +21,8 @@ namespace BazzucaSocial.DTO.Post
         public DateTime ScheduleDate { get; set; }
         [JsonPropertyName("postType")]
         public PostTypeEnum PostType { get; set; }
-        [JsonPropertyName("s3Key")]
-        public string S3Key { get; set; }
+        [JsonPropertyName("mediaUrl")]
+        public string MediaUrl { get; set; }
         [JsonPropertyName("title")]
         public string Title { get; set; }
         [JsonPropertyName("status")]

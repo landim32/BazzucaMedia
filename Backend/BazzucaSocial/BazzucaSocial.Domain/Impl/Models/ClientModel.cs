@@ -4,6 +4,7 @@ using BazzucaSocial.Domain.Interfaces.Factory;
 using BazzucaSocial.Domain.Interfaces.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BazzucaSocial.Domain.Impl.Models
 {
@@ -21,6 +22,18 @@ namespace BazzucaSocial.Domain.Impl.Models
         public long ClientId { get; set; }
         public long UserId { get; set; }
         public string Name { get; set; }
+
+        public string GetSocialNetworks(ISocialNetworkDomainFactory factory)
+        {
+            if (!(ClientId > 0))
+            {
+                return string.Empty;
+            }
+            var networks = factory.BuildSocialNetworkModel()
+                .ListByClient(ClientId, factory)
+                .Select(x => x.Network.ToString());
+            return string.Join(", ", networks);
+        }
 
         public IEnumerable<IClientModel> ListByUser(long userId, IClientDomainFactory factory)
             => _repository.ListByUser(userId, factory);

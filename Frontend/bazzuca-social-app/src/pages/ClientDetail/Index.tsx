@@ -44,12 +44,13 @@ export default function ClientDetail() {
                 navigate("/login");
                 return;
             }
-            clientContext.getById(parseInt(clientId)).then((retCli) => {
+            let clientIdNum: number = parseInt(clientId || "0");
+            clientContext.getById(clientIdNum).then((retCli) => {
                 if (!retCli.sucesso) {
                     toast.error(retCli.mensagemErro);
                     return;
                 }
-                networkContext.listByClient(parseInt(clientId)).then((retNet) => {
+                networkContext.listByClient(clientIdNum).then((retNet) => {
                     if (!retNet.sucesso) {
                         toast.error(retNet.mensagemErro);
                         return;

@@ -53,6 +53,8 @@ namespace BazzucaSocial.Application
             injectDependency(typeof(IUserClient), typeof(UserClient), services, scoped);
             injectDependency(typeof(ISocialNetworkService), typeof(SocialNetworkService), services, scoped);
             injectDependency(typeof(IClientService), typeof(ClientService), services, scoped);
+            injectDependency(typeof(IPostService), typeof(PostService), services, scoped);
+            injectDependency(typeof(IImageService), typeof(ImageService), services, scoped);
             // Adicione aqui se houver um serviço para SocialNetwork
             #endregion
 
