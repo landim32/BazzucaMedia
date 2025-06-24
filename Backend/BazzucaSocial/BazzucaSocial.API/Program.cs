@@ -32,7 +32,7 @@ namespace BazzucaSocial.API
                     {
                         options.ConfigureHttpsDefaults(httpsOptions =>
                         {
-                            var s = Assembly.GetExecutingAssembly().GetManifestResourceStream("MonexUp.API.monexup.com.pfx");
+                            var s = Assembly.GetExecutingAssembly().GetManifestResourceStream("BazzucaSocial.API.emagine.pfx");
                             using (MemoryStream ms = new MemoryStream())
                             {
                                 s.CopyTo(ms);
