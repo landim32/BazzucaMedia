@@ -1,10 +1,3 @@
-
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Calendar, BarChart3, Zap, Check, Rocket, Instagram, Facebook, Twitter, Linkedin, Youtube, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Hero from "./Hero";
@@ -14,8 +7,11 @@ import FAQ from "./FAQ";
 import { useContext, useEffect } from "react";
 import { AuthContext, IAuthProvider } from "nauth-core";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 export default function Index() {
+
+  const navigate = useNavigate();
 
   const authContext = useContext<IAuthProvider>(AuthContext);
 
@@ -30,7 +26,13 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-gradient-dark">
-      <Header sessionInfo={authContext.sessionInfo} />
+      <Header 
+        sessionInfo={authContext.sessionInfo} 
+        logout={() => {
+          authContext.logout();
+          navigate('/');
+        }}
+      />
       <Hero />
       <Features />
       <Pricing />

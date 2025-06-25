@@ -11,6 +11,8 @@ import IPostProvider from "@/Contexts/Post/IPostProvider";
 import PostContext from "@/Contexts/Post/PostContext";
 import { toast } from "sonner";
 import PostInfo from "@/DTO/Domain/PostInfo";
+import PostStatusEnum from "@/DTO/Enum/PostStatusEnum";
+import PostTypeEnum from "@/DTO/Enum/PostTypeEnum";
 
 
 export default function Post() {
@@ -29,6 +31,19 @@ export default function Post() {
         navigate("/login");
         return;
       }
+      let post: PostInfo = {
+        postId: parseInt(postId || "0"),
+        networkId: 0,
+        clientId: 0,
+        title: "",
+        description: "",
+        mediaUrl: "",
+        scheduleDate: new Date().toDateString(),
+        postType: PostTypeEnum.Post,
+        status: PostStatusEnum.Draft
+      };
+      postContext.setPost(post);
+      postContext.setImageUrl("");
       let postIdNum: number = parseInt(postId || "0");
       if (postIdNum > 0) {
         postContext.getById(postIdNum).then((retPost) => {
@@ -37,9 +52,6 @@ export default function Post() {
             return;
           }
         });
-      }
-      else {
-        postContext.setPost(null);
       }
     })
   }, []);
@@ -52,14 +64,14 @@ export default function Post() {
           <div className="p-6">
             {/* Header */}
             <div className="flex items-center mb-8">
-              <Link to="/dashboard">
-                <Button variant="ghost" className="text-gray-300 hover:text-white mr-4">
+              <Link to="/posts">
+                <Button variant="ghost" className="text-gray-300 hover:text-black mr-4">
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Back to Dashboard
                 </Button>
               </Link>
               <div>
-                <h1 className="text-3xl font-bold text-white">Create New Post</h1>
+                <h1 className="text-3xl font-bold text-white">{postId ? "Edit Post" : "Create New Post"}</h1>
                 <p className="text-gray-400">Schedule your content across social platforms</p>
               </div>
             </div>
@@ -68,6 +80,17 @@ export default function Post() {
               post={postContext.post}
               setPost={postContext.setPost}
               onSave={async (postData: PostInfo) => {
+
+                const localDate = new Date(postData.scheduleDate); // Date from picker
+                const utcDate = new Date(
+                  localDate.getTime() - localDate.getTimezoneOffset() * 60000
+                );
+                postData = {
+                  ...postData,
+                  scheduleDate: utcDate.toISOString(),
+                  postType: PostTypeEnum.Post, 
+                }
+
                 if (postData.postId > 0) {
                   let ret = await postContext.update(postData);
                   if (!ret.sucesso) {

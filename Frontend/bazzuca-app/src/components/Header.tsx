@@ -8,9 +8,10 @@ import { ChevronDown, LockIcon, LogOut, User } from "lucide-react";
 
 interface HeaderProps {
   sessionInfo?: AuthSession;
+  logout: () => void;
 }
 
-export default function Header(param: HeaderProps) {
+export default function Header(props: HeaderProps) {
 
   const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ export default function Header(param: HeaderProps) {
           <a href="#faq" className="text-gray-300 hover:text-white transition-colors">FAQ</a>
         </nav>
         <div className="flex items-center space-x-4">
-          {param.sessionInfo ? (
+          {props.sessionInfo ? (
             <>
               <Link to="/dashboard">
                 <Button className="btn-gradient">
@@ -37,7 +38,7 @@ export default function Header(param: HeaderProps) {
               <DropdownMenuTrigger asChild>
                 <Button variant="secondary" className="flex items-center space-x-2 text-black">
                   <User className="h-5 w-5" />
-                  <span>{param.sessionInfo?.name}</span>
+                  <span>{props.sessionInfo?.name}</span>
                   <ChevronDown className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
@@ -48,8 +49,7 @@ export default function Header(param: HeaderProps) {
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={(e) => {
                   e.preventDefault();
-                  //userContext.logout();
-                  navigate('/');
+                  props.logout();
                 }}>
                   <LogOut className="h-4 w-4 mr-2" />
                   Logout
