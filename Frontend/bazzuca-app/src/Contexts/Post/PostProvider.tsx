@@ -5,6 +5,7 @@ import PostFactory from "@/Business/Factory/PostFactory";
 import PostInfo from "@/DTO/Domain/PostInfo";
 import PostContext from "./PostContext";
 import ImageFactory from "@/Business/Factory/ImageFactory";
+import PostProviderResult from "@/DTO/Context/PostProviderResult";
 
 export default function PostProvider(props: any) {
 
@@ -69,7 +70,7 @@ export default function PostProvider(props: any) {
         },
 
         getById: async (PostId: number) => {
-            let ret: Promise<ProviderResult>;
+            let ret: Promise<PostProviderResult>;
             setLoading(true);
             try {
                 let brt = await PostFactory.PostBusiness.getById(PostId);
@@ -80,7 +81,8 @@ export default function PostProvider(props: any) {
                     return {
                         ...ret,
                         sucesso: true,
-                        mensagemSucesso: "User load"
+                        mensagemSucesso: "Get Post",
+                        post: brt.dataResult
                     };
                 }
                 else {
@@ -179,6 +181,39 @@ export default function PostProvider(props: any) {
                         ...ret,
                         sucesso: true,
                         mensagemSucesso: "Image uploaded"
+                    };
+                }
+                else {
+                    setLoadingUpdate(false);
+                    return {
+                        ...ret,
+                        sucesso: false,
+                        mensagemErro: brt.mensagem
+                    };
+                }
+            }
+            catch (err) {
+                setLoadingUpdate(false);
+                return {
+                    ...ret,
+                    sucesso: false,
+                    mensagemErro: JSON.stringify(err)
+                };
+            }
+        },
+
+        publish: async (postId: number) => {
+            let ret: Promise<ProviderResult>;
+            setLoadingUpdate(true);
+            try {
+                let brt = await PostFactory.PostBusiness.publish(postId);
+                if (brt.sucesso) {
+                    setLoadingUpdate(false);
+                    _setPost(brt.dataResult);
+                    return {
+                        ...ret,
+                        sucesso: true,
+                        mensagemSucesso: "User load"
                     };
                 }
                 else {

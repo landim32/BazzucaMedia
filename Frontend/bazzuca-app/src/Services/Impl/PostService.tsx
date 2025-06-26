@@ -67,6 +67,20 @@ const PostService : IPostService = {
             };
         }
         return ret;
+    },
+    publish: async (postId: number, token: string) => {
+        let ret: PostResult;
+        let request = await _httpPost.doGetAuth<PostResult>("/Post/publish/" + postId, token);
+        if (request.success) {
+            return request.data;
+        } else {
+            ret = {
+                mensagem: request.messageError,
+                sucesso: false,
+                ...ret
+            };
+        }
+        return ret;
     }
 }
 

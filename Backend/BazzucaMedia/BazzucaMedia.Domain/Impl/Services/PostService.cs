@@ -2,9 +2,11 @@ using BazzucaMedia.Domain.Interfaces.Factory;
 using BazzucaMedia.Domain.Interfaces.Models;
 using BazzucaMedia.Domain.Interfaces.Services;
 using BazzucaMedia.DTO.Post;
+using BazzucaMedia.DTO.SocialNetwork;
 using Core.Domain;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BazzucaMedia.Domain.Impl.Services
 {
@@ -16,6 +18,7 @@ namespace BazzucaMedia.Domain.Impl.Services
         private readonly ISocialNetworkDomainFactory _networkFactory;
         private readonly IClientService _clientService;
         private readonly ISocialNetworkService _networkService;
+        private readonly IS3Service _s3Service;
 
         public PostService(
             IUnitOfWork unitOfWork,
@@ -23,7 +26,8 @@ namespace BazzucaMedia.Domain.Impl.Services
             IClientDomainFactory clientFactory,
             ISocialNetworkDomainFactory networkFactory,
             IClientService clientService,
-            ISocialNetworkService networkService
+            ISocialNetworkService networkService,
+            IS3Service s3Service
         )
         {
             _unitOfWork = unitOfWork;
@@ -32,6 +36,7 @@ namespace BazzucaMedia.Domain.Impl.Services
             _networkFactory = networkFactory;
             _clientService = clientService;
             _networkService = networkService;
+            _s3Service = s3Service;
         }
 
         public IEnumerable<IPostModel> ListByUser(long userId)
@@ -108,6 +113,29 @@ namespace BazzucaMedia.Domain.Impl.Services
             model.Status = post.Status;
 
             return model.Update(_postFactory);
+        }
+
+        private IPublisherService GetPublisherService(SocialNetworkEnum socialNetwork)
+        {
+            IPublisherService publisherService = null;
+            switch (socialNetwork)
+            {
+                case SocialNetworkEnum.X:
+                    publisherService = new TwitterService(_s3Service);
+                    break;
+                default:
+                    throw new Exception("Publisher not found");
+            }
+            return publisherService;
+        }
+
+        public async Task<IPostModel> Publish(IPostModel post)
+        {
+            var publisher = GetPublisherService(post.GetSocialNetwork(_networkFactory).Network);
+            await publisher.Publish(post);
+            post.Status = PostStatusEnum.Posted;
+            return post.Update(_postFactory);
+
         }
     }
 }

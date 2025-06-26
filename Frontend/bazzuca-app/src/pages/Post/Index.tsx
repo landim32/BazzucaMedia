@@ -1,5 +1,5 @@
 
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
@@ -13,21 +13,30 @@ import { toast } from "sonner";
 import PostInfo from "@/DTO/Domain/PostInfo";
 import PostStatusEnum from "@/DTO/Enum/PostStatusEnum";
 import PostTypeEnum from "@/DTO/Enum/PostTypeEnum";
+import Header from "./Header";
+import ISocialNetworkProvider from "@/Contexts/SocialNetwork/ISocialNetworkProvider";
+import SocialNetworkContext from "@/Contexts/SocialNetwork/SocialNetworkContext";
+import logo from "@/assets/images/logo.png";
 
 
 export default function Post() {
 
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   const { postId } = useParams<"postId">();
 
   const authContext = useContext<IAuthProvider>(AuthContext);
+  const networkContext = useContext<ISocialNetworkProvider>(SocialNetworkContext);
   const postContext = useContext<IPostProvider>(PostContext);
 
 
   useEffect(() => {
-    authContext.loadUserSession().then((ret) => {
+    setLoading(true);
+    authContext.loadUserSession().then(async (ret) => {
       if (!authContext.sessionInfo) {
+        setLoading(false);
         navigate("/login");
         return;
       }
@@ -46,13 +55,20 @@ export default function Post() {
       postContext.setImageUrl("");
       let postIdNum: number = parseInt(postId || "0");
       if (postIdNum > 0) {
-        postContext.getById(postIdNum).then((retPost) => {
-          if (!retPost.sucesso) {
-            toast.error(retPost.mensagemErro);
-            return;
-          }
-        });
+        let retPost = await postContext.getById(postIdNum);
+        if (!retPost.sucesso) {
+          toast.error(retPost.mensagemErro);
+          setLoading(false);
+          return;
+        }
+        let ret = await networkContext.listByClient(retPost.post.clientId);
+        if (!ret.sucesso) {
+          toast.error(ret.mensagemErro);
+          setLoading(false);
+          return;
+        }
       }
+      setLoading(false);
     })
   }, []);
 
@@ -63,20 +79,25 @@ export default function Post() {
         <main className="flex-1">
           <div className="p-6">
             {/* Header */}
-            <div className="flex items-center mb-8">
-              <Link to="/posts">
-                <Button variant="ghost" className="text-gray-300 hover:text-black mr-4">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Dashboard
-                </Button>
-              </Link>
-              <div>
-                <h1 className="text-3xl font-bold text-white">{postId ? "Edit Post" : "Create New Post"}</h1>
-                <p className="text-gray-400">Schedule your content across social platforms</p>
-              </div>
-            </div>
+            <Header
+              insertMode={parseInt(postId || "0") > 0 ? false : true}
+              loading={postContext.loadingUpdate}
+              postId={parseInt(postId || "0")}
+              post={postContext.post}
+              setPost={postContext.setPost}
+              onPublishClick={async () => {
+                let postIdNum: number = parseInt(postId || "0");
+                let ret = await postContext.publish(postIdNum);
+                if (!ret.sucesso) {
+                  toast.error(ret.mensagemErro);
+                  return;
+                }
+                toast.success("Post published successfully!");
+              }}
+            />
             <PostForm
               loading={postContext.loading}
+              insertMode={parseInt(postId || "0") > 0 ? true : false}
               post={postContext.post}
               setPost={postContext.setPost}
               onSave={async (postData: PostInfo) => {
@@ -88,7 +109,7 @@ export default function Post() {
                 postData = {
                   ...postData,
                   scheduleDate: utcDate.toISOString(),
-                  postType: PostTypeEnum.Post, 
+                  postType: PostTypeEnum.Post,
                 }
 
                 if (postData.postId > 0) {

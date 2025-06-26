@@ -1,19 +1,20 @@
-﻿using Amazon.S3.Transfer;
-using Amazon.S3;
+﻿using Amazon.S3;
+using Amazon.S3.Transfer;
+using BazzucaMedia.Domain.Interfaces.Services;
+using Core.Domain;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Core.Domain;
-using BazzucaMedia.Domain.Interfaces.Services;
 
 namespace BazzucaMedia.Domain.Impl.Services
 {
-    public class ImageService : IImageService
+    public class S3Service : IS3Service
     {
 
         private const string ACCESS_KEY = "DO00JY46P2RAD368YY3B";
@@ -29,6 +30,15 @@ namespace BazzucaMedia.Domain.Impl.Services
                 return ENDPOINT + "/" + BUCKET_NAME + "/" + fileName;
             }
             return string.Empty;
+        }
+
+        public async Task<byte[]> DownloadFile(string url)
+        {
+            using (var httpClient = new HttpClient())
+            {
+
+                return await httpClient.GetByteArrayAsync(url);
+            }
         }
 
         private void UploadFile(Stream fileStream, string fileName)

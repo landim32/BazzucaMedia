@@ -9,4 +9,5 @@ export default interface IPostService {
     getById: (postId: number, token: string) => Promise<PostResult>;
     insert: (post: PostInfo, token: string) => Promise<PostResult>;
     update: (post: PostInfo, token: string) => Promise<PostResult>;
+    publish: (postId: number, token: string) => Promise<PostResult>;    
 }

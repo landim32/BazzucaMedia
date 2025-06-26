@@ -1,6 +1,8 @@
 using BazzucaMedia.Domain.Interfaces.Models;
 using BazzucaMedia.DTO.Post;
+using BazzucaMedia.DTO.SocialNetwork;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BazzucaMedia.Domain.Interfaces.Services
 {
@@ -11,5 +13,6 @@ namespace BazzucaMedia.Domain.Interfaces.Services
         PostInfo GetPostInfo(IPostModel model);
         IPostModel Insert(PostInfo post);
         IPostModel Update(PostInfo post);
+        Task<IPostModel> Publish(IPostModel post);
     }
 }

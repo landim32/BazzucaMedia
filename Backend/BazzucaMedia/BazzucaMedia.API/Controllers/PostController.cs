@@ -10,6 +10,7 @@ using NAuth.DTO.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BazzucaMedia.API.Controllers
 {
@@ -114,6 +115,31 @@ namespace BazzucaMedia.API.Controllers
                     return StatusCode(401, "Not Authorized");
                 }
                 var postReturn = _postService.Update(post);
+
+                return new PostResult
+                {
+                    Value = _postService.GetPostInfo(postReturn)
+                };
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("publish/{postId}")]
+        [Authorize]
+        public async Task<ActionResult<PostResult>> Publish(long postId)
+        {
+            try
+            {
+                var userSession = _userClient.GetUserInSession(HttpContext);
+                if (userSession == null)
+                {
+                    return StatusCode(401, "Not Authorized");
+                }
+                var post = _postService.GetById(postId);
+                var postReturn = await _postService.Publish(post);
 
                 return new PostResult
                 {

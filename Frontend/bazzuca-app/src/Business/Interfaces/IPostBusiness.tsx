@@ -8,4 +8,5 @@ export default interface IPostBusiness {
   getById: (PostId: number) => Promise<BusinessResult<PostInfo>>;
   insert: (Post: PostInfo) => Promise<BusinessResult<PostInfo>>;
   update: (Post: PostInfo) => Promise<BusinessResult<PostInfo>>;
+  publish: (PostId: number) => Promise<BusinessResult<PostInfo>>;
 }

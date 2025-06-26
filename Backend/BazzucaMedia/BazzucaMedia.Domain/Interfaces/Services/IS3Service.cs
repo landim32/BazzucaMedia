@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace BazzucaMedia.Domain.Interfaces.Services
 {
-    public interface IImageService
+    public interface IS3Service
     {
+        Task<byte[]> DownloadFile(string url);
         string GetImageUrl(string fileName);
         string InsertFromStream(Stream stream, string name);
     }

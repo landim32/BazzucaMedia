@@ -124,7 +124,36 @@ const PostBusiness: IPostBusiness = {
     } catch {
       throw new Error("Failed to update Post");
     }
-  }
+  },
+  publish: async (postId: number) => {
+    try {
+      let ret: BusinessResult<PostInfo>;
+      let session: AuthSession = AuthFactory.AuthBusiness.getSession();
+      if (!session) {
+        return {
+          ...ret,
+          sucesso: false,
+          mensagem: "Not logged"
+        };
+      }
+      let retServ = await _PostService.publish(postId, session.token);
+      if (retServ.sucesso) {
+        return {
+          ...ret,
+          dataResult: retServ.value,
+          sucesso: true
+        };
+      } else {
+        return {
+          ...ret,
+          sucesso: false,
+          mensagem: retServ.mensagem
+        };
+      }
+    } catch {
+      throw new Error("Failed to update Post");
+    }
+  },
 }
 
 export default PostBusiness;

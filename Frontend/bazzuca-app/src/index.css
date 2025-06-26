@@ -115,3 +115,53 @@
     @apply bg-gradient-brand text-white border-0 hover:opacity-90 transition-opacity duration-300;
   }
 }
+.rbc-month-view, 
+.rbc-month-view .rbc-header,
+.rbc-month-view .rbc-day-bg, 
+.rbc-month-view .rbc-month-row {
+  @apply border border-gray-600;
+}
+.rbc-today {
+  @apply btn-gradient text-black;
+}
+.rbc-today .rbc-button-link {
+    @apply text-black;
+  }
+.rbc-off-range-bg {
+  @apply bg-gray-800 text-black;
+}
+.rbc-btn-group button {
+  @apply bg-accent text-black;
+}
+
+.badge-twitter {
+  @apply bg-brand-twitter/20 text-white border-white/30 hover:text-black;
+}
+.badge-facebook {
+  @apply bg-brand-facebook/20 text-brand-facebook border-brand-facebook/30;
+}
+.badge-linkedin {
+  @apply bg-brand-linkedin/20 text-brand-linkedin border-brand-linkedin/30;
+}
+.badge-youtube {
+  @apply bg-brand-youtube/20 text-brand-youtube border-brand-youtube/30;
+}
+.badge-instagram {
+  @apply bg-brand-instagram/20 text-brand-instagram border-brand-instagram/30;
+}
+.badge-tiktok {
+  @apply bg-brand-tiktok/20 text-brand-tiktok border-brand-tiktok/30;
+}
+
+.badge-draft {
+  @apply bg-brand-purple/20 text-brand-purple border-brand-purple/30;
+}
+.badge-scheduled {
+  @apply bg-brand-green/20 text-brand-green border-brand-green/30;
+}
+.badge-posted {
+  @apply bg-brand-blue/20 text-brand-blue border-brand-blue/30;
+}
+.badge-cancelled {
+  @apply bg-brand-red/20 text-brand-red border-brand-red/30;
+}

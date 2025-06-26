@@ -54,7 +54,8 @@ namespace BazzucaMedia.Application
             injectDependency(typeof(ISocialNetworkService), typeof(SocialNetworkService), services, scoped);
             injectDependency(typeof(IClientService), typeof(ClientService), services, scoped);
             injectDependency(typeof(IPostService), typeof(PostService), services, scoped);
-            injectDependency(typeof(IImageService), typeof(ImageService), services, scoped);
+            injectDependency(typeof(IS3Service), typeof(S3Service), services, scoped);
+            injectDependency(typeof(ITwitterService), typeof(TwitterService), services, scoped);
             // Adicione aqui se houver um serviço para SocialNetwork
             #endregion
 

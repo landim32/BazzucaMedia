@@ -22,6 +22,7 @@ import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
 
 interface IPostProps {
+  insertMode: boolean;
   loading: boolean;
   post?: PostInfo;
   setPost: (post: PostInfo) => void;
@@ -206,31 +207,33 @@ export function PostForm(props: IPostProps) {
               />
             </div>
 
-            {/* Submit Buttons */}
-            <div className="flex space-x-4 pt-4">
-              <Button
-                type="button"
-                className="btn-gradient flex-1"
-                disabled={postContext.loadingUpdate}
-                onClick={(e) => {
-                  e.preventDefault();
-                  postSaveHandler(PostStatusEnum.Scheduled);
-                }}
-              >
-                {postContext.loadingUpdate ? "Scheduling..." : "Schedule Post"}
-              </Button>
-              <Button
-                type="button"
-                variant="outline"
-                className="border-brand-gray text-gray-300 hover:bg-secondary hover:text-black"
-                onClick={(e) => {
-                  e.preventDefault();
-                  postSaveHandler(PostStatusEnum.Draft);
-                }}
-              >
-                {postContext.loadingUpdate ? "Saving..." : "Save as Draft"}
-              </Button>
-            </div>
+
+            {props.post?.status != PostStatusEnum.Posted && (
+              <div className="flex space-x-4 pt-4">
+                <Button
+                  type="button"
+                  className="btn-gradient flex-1"
+                  disabled={postContext.loadingUpdate}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    postSaveHandler(PostStatusEnum.Scheduled);
+                  }}
+                >
+                  {postContext.loadingUpdate ? "Scheduling..." : "Schedule Post"}
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="border-brand-gray text-gray-300 hover:bg-secondary hover:text-black"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    postSaveHandler(PostStatusEnum.Draft);
+                  }}
+                >
+                  {postContext.loadingUpdate ? "Saving..." : "Save as Draft"}
+                </Button>
+              </div>
+            )}
           </div>
           <div className="md:w-1/3">
             <Label className="text-white">Media Upload</Label>

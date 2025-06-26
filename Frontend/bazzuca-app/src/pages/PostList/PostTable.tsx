@@ -1,4 +1,4 @@
-import { getNetworkName, getPostStatusName } from "@/components/functions";
+import { getNetworkBadge, getNetworkName, getPostStatusBadge, getPostStatusName } from "@/components/functions";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -94,10 +94,9 @@ export default function PostTable(props: IPostProps) {
                             <TableCell>
                                 <div className="flex items-center space-x-2 text-muted-foreground">
                                     <Link to={`/posts/${post.postId}`}>
-                                        <Network className="h-4 w-4" style={{ display: 'inline-block' }} />
                                         <Badge
                                             variant="secondary"
-                                            className="bg-brand-blue/20 text-brand-blue border-brand-blue/30"
+                                            className={getNetworkBadge(post.socialNetwork.network)}
                                         >{getNetworkName(post.socialNetwork.network)}</Badge>
                                     </Link>
                                 </div>
@@ -121,10 +120,7 @@ export default function PostTable(props: IPostProps) {
                             <TableCell>
                                 <div className="flex items-center space-x-2 text-muted-foreground">
                                     <Link to={`/posts/${post.postId}`}>
-                                        <Badge
-                                            variant="secondary"
-                                            className="bg-brand-blue/20 text-brand-blue border-brand-blue/30"
-                                        >{getPostStatusName(post.status)}</Badge>
+                                        {getPostStatusBadge(post.status)}
                                     </Link>
                                 </div>
                             </TableCell>

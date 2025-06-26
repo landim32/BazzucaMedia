@@ -69,9 +69,17 @@ export default {
 				// Social Bazzuca custom colors
 				'brand-blue': '#3B82F6',
 				'brand-purple': '#a93bab',
+				'brand-green': '#10B981',     // verde esmeralda
+				'brand-red':   '#EF4444',     // vermelho vibrante
 				'brand-dark': '#0F172A',
 				'brand-darker': '#020617',
-				'brand-gray': '#1E293B'
+				'brand-gray': '#1E293B',
+				'brand-facebook': '#1877F2',
+				'brand-linkedin': '#0A66C2',
+				'brand-youtube': '#FF0000',
+				'brand-instagram': '#E1306C',
+				'brand-tiktok': '#69C9D0',
+				'brand-twitter': '#000000'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

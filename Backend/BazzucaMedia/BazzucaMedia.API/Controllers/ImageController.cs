@@ -18,11 +18,11 @@ namespace BazzucaMedia.API.Controllers
     public class ImageController: ControllerBase
     {
         private readonly IUserClient _userClient;
-        private readonly IImageService _imageService;
+        private readonly IS3Service _imageService;
 
         public ImageController(
             IUserClient userClient,
-            IImageService imageService
+            IS3Service imageService
         ) {
             _userClient = userClient;
             _imageService = imageService;

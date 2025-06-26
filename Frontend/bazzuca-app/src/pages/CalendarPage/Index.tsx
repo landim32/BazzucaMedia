@@ -114,7 +114,7 @@ export default function CalendarPage() {
                                             onSelectEvent={handleSelectEvent}
                                             eventPropGetter={eventPropGetter} // Apply the custom event properties
                                             style={{ height: '100%' }}
-                                            className="text-white" // Apply text color to the calendar
+                                            className="text-white bg-dark border border-gray-600 rounded-md"
                                         />
                                     </div>
                                 </CardContent>

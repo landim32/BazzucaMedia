@@ -46,14 +46,16 @@ const menuItems = [
 ];
 
 export function AppSidebar() {
-  
+
   const location = useLocation();
 
   return (
     <Sidebar className="bg-brand-dark border-brand-gray/30">
       <SidebarHeader className="border-b border-brand-gray/30 p-4">
         <div className="flex items-center space-x-3">
-          <img src={logo} alt="Social Bazzuca" className="h-8 w-auto" />
+          <Link to="/">
+            <img src={logo} alt="Social Bazzuca" className="h-8 w-auto" />
+          </Link>
         </div>
         <SidebarTrigger className="ml-auto text-white" />
       </SidebarHeader>
@@ -64,11 +66,10 @@ export function AppSidebar() {
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton 
-                    asChild 
-                    className={`text-gray-300 hover:text-white hover:bg-brand-gray/50 ${
-                      location.pathname === item.url ? 'bg-brand-blue/20 text-brand-blue' : ''
-                    }`}
+                  <SidebarMenuButton
+                    asChild
+                    className={`text-gray-300 hover:text-white hover:bg-brand-gray/50 active:text-black ${location.pathname === item.url ? 'bg-brand-blue/20 text-brand-blue' : ''
+                      }`}
                   >
                     <Link to={item.url}>
                       <item.icon className="w-4 h-4" />
