@@ -26,6 +26,8 @@ COPY ["BazzucaMedia.Domain/BazzucaMedia.Domain.csproj", "BazzucaMedia.Domain/"]
 COPY ["Core.Domain/Core.Domain.csproj", "Core.Domain/"]
 COPY ["BazzucaMedia.DTO/BazzucaMedia.DTO.csproj", "BazzucaMedia.DTO/"]
 COPY ["DB.Infra/DB.Infra.csproj", "DB.Infra/"]
+COPY ["Lib/NAuth.DTO.dll", "Lib/"]
+COPY ["Lib/NAuth.Client.dll", "Lib/"]
 RUN dotnet restore "BazzucaMedia.API/BazzucaMedia.API.csproj"
 COPY . .
 WORKDIR "/src/BazzucaMedia.API"

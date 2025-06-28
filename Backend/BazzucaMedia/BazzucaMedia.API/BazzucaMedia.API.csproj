@@ -37,4 +37,13 @@
   <ItemGroup>
     <EmbeddedResource Include="emagine.pfx" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="NAuth.Client">
+      <HintPath>..\Lib\NAuth.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="NAuth.DTO">
+      <HintPath>..\Lib\NAuth.DTO.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

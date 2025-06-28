@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\NAuth\Backend\NAuth\NAuth.Client\NAuth.Client.csproj" />
     <ProjectReference Include="..\BazzucaMedia.Domain\BazzucaMedia.Domain.csproj" />
     <ProjectReference Include="..\Core.Domain\Core.Domain.csproj" />
     <ProjectReference Include="..\DB.Infra\DB.Infra.csproj" />
@@ -22,5 +21,11 @@
     <None Remove="Microsoft.EntityFrameworkCore.Design" />
     <None Remove="Microsoft.EntityFrameworkCore" />
     <None Remove="Microsoft.EntityFrameworkCore.Proxies" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="NAuth.Client">
+      <HintPath>..\Lib\NAuth.Client.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

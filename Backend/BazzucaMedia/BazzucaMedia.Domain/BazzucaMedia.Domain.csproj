@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\NAuth\Backend\NAuth\NAuth.Client\NAuth.Client.csproj" />
     <ProjectReference Include="..\BazzucaMedia.DTO\BazzucaMedia.DTO.csproj" />
     <ProjectReference Include="..\Core.Domain\Core.Domain.csproj" />
   </ItemGroup>
