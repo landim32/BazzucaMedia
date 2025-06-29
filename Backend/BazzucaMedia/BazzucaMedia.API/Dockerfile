@@ -19,7 +19,7 @@ RUN make install
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["BazzucaMedia.API/emagine.pfx", "BazzucaMedia.API/"]
+COPY ["BazzucaMedia.API/bazzuca.pfx", "BazzucaMedia.API/"]
 COPY ["BazzucaMedia.API/BazzucaMedia.API.csproj", "BazzucaMedia.API/"]
 COPY ["BazzucaMedia.Application/BazzucaMedia.Application.csproj", "BazzucaMedia.Application/"]
 COPY ["BazzucaMedia.Domain/BazzucaMedia.Domain.csproj", "BazzucaMedia.Domain/"]
