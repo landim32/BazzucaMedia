@@ -11,6 +11,7 @@
     <Content Remove="DTOs\**" />
     <EmbeddedResource Remove="DTOs\**" />
     <None Remove="DTOs\**" />
+    <None Remove="bazzuca.pfx" />
     <None Remove="DTO\" />
     <None Remove="BazzucaMedia.com.pfx" />
     <None Remove="emagine.pfx" />
@@ -35,7 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="emagine.pfx" />
+    <EmbeddedResource Include="bazzuca.pfx" />
   </ItemGroup>
 
   <ItemGroup>

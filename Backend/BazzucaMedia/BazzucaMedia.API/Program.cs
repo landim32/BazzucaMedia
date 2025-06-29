@@ -32,7 +32,7 @@ namespace BazzucaMedia.API
                     {
                         options.ConfigureHttpsDefaults(httpsOptions =>
                         {
-                            var s = Assembly.GetExecutingAssembly().GetManifestResourceStream("BazzucaMedia.API.emagine.pfx");
+                            var s = Assembly.GetExecutingAssembly().GetManifestResourceStream("BazzucaMedia.API.bazzuca.pfx");
                             using (MemoryStream ms = new MemoryStream())
                             {
                                 s.CopyTo(ms);
