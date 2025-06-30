@@ -60,7 +60,7 @@ export default function Header(props: HeaderProps) {
           ) : (
             <>
               <Link to="/login">
-                <Button variant="secondary" className="text-gray-300 hover:text-white transition-colors">
+                <Button variant="default" className="text-gray-800 hover:text-black hover:bg-brand-gray/50 hover:text-white transition-colors">
                   Login
                 </Button>
               </Link>
