@@ -28,6 +28,7 @@ namespace BazzucaMedia.API.Controllers
             _imageService = imageService;
         }
 
+        [RequestSizeLimit(100_000_000)]
         [Authorize]
         [HttpPost("uploadImage")]
         public ActionResult<StringResult> UploadImage(IFormFile file)
