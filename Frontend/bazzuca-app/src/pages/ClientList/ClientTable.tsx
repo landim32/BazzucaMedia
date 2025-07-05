@@ -72,7 +72,7 @@ export default function ClientTable(props: IClientProps) {
                             </TableCell>
                             <TableCell className="text-muted-foreground">
                                 <Link to={`/clients/${client.clientId}`}>
-                                    <span>{client.socialNetworks.map((network) => (
+                                    <span>{client.socialNetworks?.map((network) => (
                                         <Badge
                                             variant="secondary"
                                             className={getNetworkBadge(network) + " mr-1"}
