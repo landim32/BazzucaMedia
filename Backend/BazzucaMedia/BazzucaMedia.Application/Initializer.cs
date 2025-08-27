@@ -20,7 +20,8 @@ namespace BazzucaMedia.Application
 {
     public static class Initializer
     {
-        private static readonly string API_URL = "https://emagine.com.br/auth-api";
+        //private static readonly string API_URL = "https://emagine.com.br/auth-api";
+        private static readonly string API_URL = "https://nauth-api1:443";
 
         private static void injectDependency(Type serviceType, Type implementationType, IServiceCollection services, bool scoped = true)
         {
