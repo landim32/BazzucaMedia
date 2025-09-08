@@ -8,6 +8,7 @@ cp NAuth.Client.dll ../../../../../../../BazzucaMedia/Backend/BazzucaMedia/Lib
 cp NAuth.DTO.dll ../../../../../../../BazzucaMedia/Backend/BazzucaMedia/Lib
 cd ../../../../../../../NAuth/Frontend/nauth-core
 pwd
-npm install
+npm install --legacy-peer-deps
 npm run build
-cp -Rf ./dist/* ../../../BazzucaMedia/Frontend/bazzuca-app/src/nauth-core
+rm -Rf ../../../BazzucaMedia/Frontend/bazzuca-app/src/lib/nauth-core
+cp -Rf ./dist ../../../BazzucaMedia/Frontend/bazzuca-app/src/lib/nauth-core
